@@ -1,0 +1,17 @@
+albumentations
+configargparse
+matplotlib
+monai
+nibabel
+numpy
+opencv-python
+pandas
+pathlib
+polyaxon-client==0.5.6
+pytorch_lightning==1.0.6
+scikit-learn
+SimpleITK
+torch==1.7.0
+torchgeometry==0.1.2
+torchvision
+tqdm==4.51.0

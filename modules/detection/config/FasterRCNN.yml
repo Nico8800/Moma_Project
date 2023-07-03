@@ -1,0 +1,47 @@
+# MODULE GROUP
+module : detection.FasterRCNN.FasterRCNN
+
+# MODEL GROUP
+model : FasterRCNN.FasterRCNN
+input_crop_size: 312
+input_clip_length: 16
+model_num_class: 16
+depth_factor: 5
+aact_out_class :  53 # 53 *16  atomical activities+ nan class x number of frames
+subact_out_class : 68 # 68 subactivities
+activity_out_class : 17 # 17 activities
+pretrained : True
+input_channels : 3
+x3d_type : x3d_l
+checkpoint : /home/nicolasg/moma/checkpoints/Faster_RCNN.pyth
+
+# DATASET GROUP
+dataset : MOMA_Detect.MOMA_Detection
+data_root: 'not used'
+train_path: '/home/nicolasg/code/annotations/train_detect_mod.json'
+val_path: '/home/nicolasg/code/annotations/val_detect_mod.json'
+df_train_path: 'not used'
+df_val_path: 'not used'
+# TRAINER GROUP
+#trainer config
+overfit_batches : 0.0
+num_workers : 10
+learning_rate : 0.001
+batch_size : 2
+log_every_n_steps : 1
+num_sanity_val_steps : 0
+min_epochs : 150
+max_epochs : 150
+check_val_every_n_epoch : 1
+save_top_k : 1
+early_stopping_metric : val_acc
+gpus : [1]
+detection_threshold : 0.5
+
+#logging and GPUs config all on default see utils.configargparse
+# run_test : true
+# fast_dev_run: true
+
+#------------------------------------------------------------------#
+# must check the direction of data_root and result_root before run #
+#------------------------------------------------------------------#

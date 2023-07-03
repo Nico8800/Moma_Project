@@ -1,0 +1,13 @@
+configargparse
+pytorch-lightning
+libgcc
+wandb
+pytorch
+torchvision
+cudatoolkit=11.6
+torchmetrics>=0.4.1
+pytorch-lightning>=1.6.0
+torchmetrics 
+pandas
+opencv
+numpy

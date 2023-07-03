@@ -1,0 +1,30 @@
+wandb: Currently logged in as: nicolasg8. Use `wandb login --relogin` to force relogin
+Using cache found in /home/guests/nicolas_gossard/.cache/torch/hub/facebookresearch_pytorchvideo_main
+wandb: Tracking run with wandb version 0.13.2
+wandb: Run data is saved locally in /home/guests/nicolas_gossard/IDP/slurm_scripts/wandb/run-20220907_104836-2hep07o3
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run giddy-oath-19
+wandb: ⭐️ View project at https://wandb.ai/nicolasg8/uncategorized
+wandb: 🚀 View run at https://wandb.ai/nicolasg8/uncategorized/runs/2hep07o3
+Traceback (most recent call last):
+  File "/home/guests/nicolas_gossard/IDP/train.py", line 166, in <module>
+    train(hparams, ModuleClass, ModelClass, DatasetClass, loggers)
+  File "/home/guests/nicolas_gossard/IDP/train.py", line 59, in train
+    trainer = Trainer(accelerator='ddp',
+  File "/home/guests/nicolas_gossard/.conda/envs/pyfl/lib/python3.10/site-packages/pytorch_lightning/trainer/connectors/env_vars_connector.py", line 42, in overwrite_by_env_vars
+    return fn(self, **kwargs)
+  File "/home/guests/nicolas_gossard/.conda/envs/pyfl/lib/python3.10/site-packages/pytorch_lightning/trainer/trainer.py", line 318, in __init__
+    self.accelerator_connector = AcceleratorConnector(
+  File "/home/guests/nicolas_gossard/.conda/envs/pyfl/lib/python3.10/site-packages/pytorch_lightning/trainer/connectors/accelerator_connector.py", line 117, in __init__
+    self.parallel_device_ids = device_parser.parse_gpu_ids(self.gpus)
+  File "/home/guests/nicolas_gossard/.conda/envs/pyfl/lib/python3.10/site-packages/pytorch_lightning/utilities/device_parser.py", line 81, in parse_gpu_ids
+    gpus = _sanitize_gpu_ids(gpus)
+  File "/home/guests/nicolas_gossard/.conda/envs/pyfl/lib/python3.10/site-packages/pytorch_lightning/utilities/device_parser.py", line 142, in _sanitize_gpu_ids
+    raise MisconfigurationException(
+pytorch_lightning.utilities.exceptions.MisconfigurationException: You requested GPUs: [1]
+ But your machine only has: [0]
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+wandb: - 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: \ 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: | 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: / 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: - 0.001 MB of 0.006 MB uploaded (0.000 MB deduped)wandb: \ 0.001 MB of 0.007 MB uploaded (0.000 MB deduped)wandb: | 0.001 MB of 0.007 MB uploaded (0.000 MB deduped)wandb: / 0.007 MB of 0.007 MB uploaded (0.000 MB deduped)wandb: - 0.007 MB of 0.007 MB uploaded (0.000 MB deduped)wandb: \ 0.007 MB of 0.007 MB uploaded (0.000 MB deduped)wandb: | 0.007 MB of 0.007 MB uploaded (0.000 MB deduped)wandb: / 0.007 MB of 0.007 MB uploaded (0.000 MB deduped)wandb: - 0.007 MB of 0.007 MB uploaded (0.000 MB deduped)wandb: \ 0.007 MB of 0.007 MB uploaded (0.000 MB deduped)wandb: | 0.007 MB of 0.007 MB uploaded (0.000 MB deduped)wandb:                                                                                
+wandb: Synced giddy-oath-19: https://wandb.ai/nicolasg8/uncategorized/runs/2hep07o3
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20220907_104836-2hep07o3/logs

@@ -1,0 +1,33 @@
+version: 1
+
+kind: experiment
+
+tags: [ dummy ]
+
+description: 'pytorch lightning mnist example'
+
+build:
+  image: 'pytorch/pytorch:1.7.0-cuda11.0-cudnn8-runtime'
+  build_steps:
+    - apt update
+    - apt install -y libglib2.0-0 libsm6 libxext6 libxrender-dev git libgl1-mesa-glx
+    - pip install -r requirements.txt
+    #- wandb login #PERSONAL TOKEN
+
+
+environment:
+  resources:
+   cpu:
+     requests: 3
+     limits: 3
+   memory:
+     requests: 4098
+     limits: 4098
+
+params:
+  config_file: modules/multiclass_classifier/config/config_multiclass_classifier.yml
+  data_root: /data
+
+run:
+  cmd:
+    - python -u train.py -c {{config_file}} --data_root={{data_root}} --on_polyaxon

@@ -1,0 +1,102 @@
+# MODULE GROUP
+module : multiclass_classifier.multiclass_classifier_X3D.MultiClassClassification
+
+# MODEL GROUP
+model : HGNN.HGNN.HGNN
+input_crop_size: 312
+input_clip_length: 16
+model_num_class: 16
+depth_factor: 5
+aact_out_class :  53 # 53 *16  atomical activities+ nan class x number of frames
+subact_out_class : 68 # 68 subactivities
+activity_out_class : 17 # 17 activities
+pretrained : True
+input_channels : 3
+x3d_type : x3d_l
+checkpoint : /home/guests/nicolas_gossard/IDP/checkpoints/HGNN.pyth
+
+# DATASET GROUP
+dataset : MOMA_input_graph_stream.MOMA
+data_root: 'not used'
+df_train_path: '/home/guests/nicolas_gossard/annotations/train1.csv'
+df_val_path: '/home/guests/nicolas_gossard/annotations/valid1.csv'
+
+# TRAINER GROUP
+#trainer config
+overfit_batches : 0.0
+num_workers : 10
+learning_rate : 0.001
+batch_size : 1
+log_every_n_steps : 1
+num_sanity_val_steps : 0
+min_epochs : 150
+max_epochs : 150
+check_val_every_n_epoch : 1
+save_top_k : 1
+early_stopping_metric : val_acc
+gpus : 1
+#logging and GPUs config all on default see utils.configargparse
+# run_test : true
+# fast_dev_run: true
+
+#------------------------------------------------------------------#
+# must check the direction of data_root and result_root before run #
+#------------------------------------------------------------------#
+
+
+
+
+#configure feature path
+# **** please must modify the data_root before first running ****
+data_root: &d_r /home/guests/nicolas_gossard/moma_data/features
+modelnet40_ft: !join [*d_r, ModelNet40_mvcnn_gvcnn.mat]
+ntu2012_ft: !join [*d_r, NTU2012_mvcnn_gvcnn.mat]
+MOMA_ft: !join [*d_r, MOMA.mat]
+
+#Hypergraph
+graph_type: &g_t hypergraph
+K_neigs: [10]
+#K_neigs: [10, 15 ]
+m_prob: 1.0
+is_probH: True
+#---------------------------------------
+# change me
+use_mvcnn_feature_for_structure: True
+use_gvcnn_feature_for_structure: True
+#---------------------------------------
+
+
+#Model
+#--------------------------------------------------
+# select the dataset you use, ModelNet40 or NTU2012  // adding MOMA
+on_dataset: &o_d MOMA
+#on_dataset: &o_d NTU2012
+#--------------------------------------------------
+
+#---------------------------------------
+# change me
+use_mvcnn_feature: False
+use_gvcnn_feature: True
+#---------------------------------------
+
+
+#Result
+# configure result path
+# **** please must modify the result_root before first running ****
+result_root: &r_r /home/guests/nicolas_gossard/IDP/results
+result_sub_folder: !join [*r_r, !concat [ *g_t, _, *o_d ]]
+checkpoint_root: &c_r /home/guests/nicolas_gossard/IDP/checkpoints/graph_stream
+ckpt_folder: !join [*c_r, ckpt]
+
+
+#Train
+max_epoch: 600
+n_hid: 128
+lr: 0.001
+milestones: [100]
+gamma: 0.9
+drop_out: 0.5
+print_freq: 50
+weight_decay: 0.0005
+decay_step: 200
+decay_rate: 0.7
